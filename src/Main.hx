@@ -19,7 +19,7 @@ class Main {
         context.fillRect(0, 0, 512, 512);
         context.stroke();
 
-        //bouton that generate an 8*8 symetrical patern on a black background
+        //bouton that generate an 8*8 symetrical pattern on a black background
         var generatebutton = Browser.document.getElementById("generatebutton");
         generatebutton.onclick = function() {
             //clear in black
@@ -30,7 +30,7 @@ class Main {
             var randomcolor = Std.random(0x1000000);
             context.fillStyle = "#" + StringTools.hex(randomcolor, 6);
 
-            //patern generation
+            //pattern generation
             for(y in 0...8) {
                 for(x in 0...4) {
                     var randn = Std.random(2);
@@ -43,11 +43,10 @@ class Main {
                 }
             }
             
-            //trace(StringTools.hex(randomcolor, 6));
             context.stroke();       //paint on the canvas
         }
 
-        //bouton that generate an 8*8 symetrical patern on a background with a random color
+        //bouton that generate an 8*8 symetrical pattern on a background with a random color
         var generatewithbgbutton = Browser.document.getElementById("generatewithbgbutton");
         generatewithbgbutton.onclick = function () {
             //clear with a random color
@@ -55,7 +54,7 @@ class Main {
             context.fillStyle = "#" + StringTools.hex(bgcolor, 6);  //convert to a string
             context.fillRect(0, 0, 512, 512);                       //clear with this color
 
-            //generate a random color for the patern
+            //generate a random color for the pattern
             var randomcolor = Std.random(0x1000000);
             context.fillStyle = "#" + StringTools.hex(randomcolor, 6);
 
@@ -71,7 +70,6 @@ class Main {
                 }
             }
             
-            //trace(StringTools.hex(randomcolor, 6));
             context.stroke();       //paint on the canvas
         }
 
@@ -87,6 +85,26 @@ class Main {
                 for(x in 0...4) {
                     //replace the old background color by the new one
                     if(pattern[y*4+x] == 0) {
+                        context.fillRect(x*64, y*64, 64, 64);
+                        context.fillRect(448-x*64, y*64, 64, 64);
+                    }
+                }
+            }
+            context.stroke();   //paint on canvas
+        }
+
+        //button that change the forground color
+        var changefgbutton = Browser.document.getElementById("changefgbutton");
+        changefgbutton.onclick = function () {
+            //generate a new random foreground color
+            var randomcolor = Std.random(0x1000000);
+            context.fillStyle = "#" + StringTools.hex(randomcolor, 6);
+
+            //for each pixel
+            for(y in 0...8) {
+                for(x in 0...4) {
+                    //replace the old foreground color by the new one
+                    if(pattern[y*4+x] == 1) {
                         context.fillRect(x*64, y*64, 64, 64);
                         context.fillRect(448-x*64, y*64, 64, 64);
                     }
